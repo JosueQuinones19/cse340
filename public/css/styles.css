@@ -156,9 +156,15 @@ nav a:hover {
 }
 
 .upgrade-item a {
-  color: #00bfff;
+  color: #333333;
   text-decoration: underline;
   font-size: 0.9rem;
+}
+
+.upgrade-item a:hover {
+  color: #00bfff;
+  /* Azul brillante como acento al pasar el ratón, para mantener interactividad */
+  text-decoration: none;
 }
 
 /* footer */
