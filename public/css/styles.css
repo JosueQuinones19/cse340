@@ -1,6 +1,134 @@
-/******* Change Box Model ***************/
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
+html {
+  background-image: url('/images/site/checkerboard.jpg');
+  background-repeat: repeat;
+}
+
+body {
+  background-color: transparent;
+  font-family: sans-serif;
+  margin: 0;
+}
+
+/* --- mobile first (mobile) --- */
+:root {
+  --primary: #3a3a3a;
+  --accent: #00bfff;
+  --bg: #ffffff;
+}
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+}
+
+#wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  border: 5px solid #00bfff;
+}
+
+/* nav for mobile */
+nav ul {
+  background-color: var(--primary);
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+  list-style: none;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 15px 5px;
+  display: block;
+}
+
+/* Hero Section Stacked */
+.hero-section {
+  position: relative;
+  padding: 10px;
+}
+
+.hero-content {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  z-index: 1;
+}
+
+.hero-title {
+  color: var(--accent);
+  margin: 0;
+}
+
+.hero-btn {
+  background-color: var(--accent);
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+}
+
+.bottom-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.upgrades-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.upgrade-item {
+  text-align: center;
+}
+
+.upgrade-img-box {
+  background-color: var(--accent);
+  padding: 10px;
+  border: 1px solid black;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upgrade-img-box img {
+  max-height: 100%;
+}
+
+/* --- large screen (desktop) --- */
+@media screen and (min-width: 768px) {
+  .hero-content {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    border: 1px solid #ccc;
+  }
+
+@media screen and (min-width: 768px) {
+  .bottom-container {
+    display: flex;
+    flex-direction: row-reverse;
+    /* Esto voltea el orden en escritorio para que coincida con la imagen */
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+
+  .upgrades-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+
+  .reviews,
+  .upgrades {
+    width: 48%;
+  }
 }
