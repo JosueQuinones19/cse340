@@ -6,13 +6,12 @@ html {
 
 body {
   background-color: transparent;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   display: flex;
   justify-content: center;
 }
 
-/* --- main --- */
 #wrapper {
   max-width: 1000px;
   width: 100%;
@@ -35,9 +34,10 @@ body {
 h1 {
   padding: 0 20px;
   margin-top: 20px;
+  color: #222;
 }
 
-/* --- nav mobile--- */
+/* --- mobile nav--- */
 nav {
   background-color: #3a3a3a;
 }
@@ -53,7 +53,7 @@ nav ul {
 }
 
 nav a {
-  color: white;
+  color: #ffffff;
   text-decoration: none;
   padding: 15px 10px;
   display: block;
@@ -61,8 +61,8 @@ nav a {
 }
 
 nav a:hover {
-  background-color: #00bfff;
-  color: #3a3a3a;
+  background-color: #000000;
+  color: #00bfff;
 }
 
 /* --- hero section --- */
@@ -78,45 +78,51 @@ nav a:hover {
 }
 
 .hero-content {
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.9);
   padding: 15px;
   border: 1px solid #ddd;
   margin-bottom: 15px;
 }
 
 .hero-title {
-  color: #00bfff;
+  color: #003366;
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
 }
 
 .hero-list {
   padding-left: 20px;
   list-style: square;
+  color: #333;
 }
 
 .hero-btn {
   background-color: #00bfff;
-  border: none;
+  color: #000000;
+  border: 1px solid #003366;
   padding: 12px 25px;
   font-weight: bold;
   cursor: pointer;
-  display: block;
+  display: inline-block;
   margin-top: 10px;
 }
 
-/* --- mobile --- */
+.hero-btn:hover {
+  background-color: #003366;
+  color: #ffffff;
+}
+
 .bottom-container {
   padding: 20px;
   display: flex;
   flex-direction: column;
 }
 
-/* reviews */
 .reviews h2,
 .upgrades h2 {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 2px solid #00bfff;
   padding-bottom: 10px;
+  color: #222;
 }
 
 .reviews ul {
@@ -124,10 +130,11 @@ nav a:hover {
 }
 
 .reviews li {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  color: #444;
 }
 
-/* upgrades Grid */
+/* upgrade grid */
 .upgrades-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -143,11 +150,11 @@ nav a:hover {
   background-color: #00bfff;
   padding: 10px;
   border: 1px solid #000;
-  height: 80px;
+  height: 90px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 
 .upgrade-img-box img {
@@ -156,38 +163,37 @@ nav a:hover {
 }
 
 .upgrade-item a {
-  color: #333333;
+  color: #003366;
   text-decoration: underline;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 .upgrade-item a:hover {
-  color: #00bfff;
-  text-decoration: none;
+  color: #e67e22;
 }
 
-/* footer */
+/* --- footer --- */
 footer {
   padding: 20px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+  background-color: #f9f9f9;
   border-top: 1px solid #ddd;
   margin-top: auto;
+  text-align: center;
 }
 
-/* --- large screen--- */
 @media screen and (min-width: 768px) {
-
-  
   .hero-content {
     position: absolute;
-    top: 40px;
-    left: 40px;
-    width: 250px;
+    top: 30px;
+    left: 30px;
+    width: 280px;
     z-index: 2;
-    border: 1px solid #00bfff;
+    border: 2px solid #00bfff;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
   }
 
-  
   .bottom-container {
     flex-direction: row-reverse;
     justify-content: space-between;
@@ -200,6 +206,6 @@ footer {
   }
 
   nav a {
-    padding: 15px 25px;
+    padding: 15px 30px;
   }
 }
