@@ -163,7 +163,6 @@ nav a:hover {
 
 .upgrade-item a:hover {
   color: #00bfff;
-  /* Azul brillante como acento al pasar el ratón, para mantener interactividad */
   text-decoration: none;
 }
 
