@@ -46,19 +46,6 @@ VALUES ('Custom'),
 SELECT *
 FROM public.inventory
 ORDER BY inv_id ASC;
--- 4. Modify "GM Hummer" (REPLACE in the description)
-UPDATE public.inventory
-SET inv_description = REPLACE(
-        inv_description,
-        'small interiors',
-        'a huge interior'
-    )
-WHERE inv_make = 'GM'
-    AND inv_model = 'Hummer';
--- 6. Update image paths (Add /vehicles)
-UPDATE public.inventory
-SET inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
-    inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');
 -- Data for table `inventory`
 INSERT INTO public.inventory (
         inv_make,
@@ -252,3 +239,16 @@ VALUES (
         'White',
         5
     );
+-- 4. Modify "GM Hummer" (REPLACE in the description)
+UPDATE public.inventory
+SET inv_description = REPLACE(
+        inv_description,
+        'small interiors',
+        'a huge interior'
+    )
+WHERE inv_make = 'GM'
+    AND inv_model = 'Hummer';
+-- 6. Update image paths (Add /vehicles)
+UPDATE public.inventory
+SET inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
+    inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');
