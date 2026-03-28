@@ -59,6 +59,41 @@ Util.buildClassificationGrid = async function(data){
 }
 
 /* ****************************************
+ * Build the HTML for a specific vehicle detail view
+ * **************************************** */
+Util.buildVehicleDetail = async function (vehicle) {
+  let detailHTML = "";
+  if (vehicle) {
+    let formattedPrice = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      maximumFractionDigits: 0
+    }).format(vehicle.inv_price);
+
+  
+    let formattedMileage = new Intl.NumberFormat('en-US').format(vehicle.inv_miles);
+
+    
+    detailHTML += '<div class="vehicle-detail-container">';
+    detailHTML += `<div class="vehicle-image-box">`;
+    detailHTML += `<img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model} on CSE Motors">`;
+    detailHTML += `</div>`;
+    
+    detailHTML += `<div class="vehicle-info-box">`;
+    detailHTML += `<h2>${vehicle.inv_make} ${vehicle.inv_model} Details</h2>`;
+    detailHTML += `<p class="vehicle-price"><strong>Price:</strong> ${formattedPrice}</p>`;
+    detailHTML += `<p><strong>Description:</strong> ${vehicle.inv_description}</p>`;
+    detailHTML += `<p><strong>Color:</strong> ${vehicle.inv_color}</p>`;
+    detailHTML += `<p><strong>Mileage:</strong> ${formattedMileage} miles</p>`;
+    detailHTML += `</div>`;
+    detailHTML += '</div>';
+  } else {
+    detailHTML += '<p class="notice">Sorry, no vehicle could be found.</p>';
+  }
+  return detailHTML;
+};
+
+/* ****************************************
  * Middleware For Handling Errors
  **************************************** */
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)

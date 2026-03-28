@@ -253,3 +253,64 @@ footer {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 }
+
+/* =========================================
+   VEHICLE DETAIL VIEW
+   ========================================= */
+.detail-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Diseño base para celulares (uno arriba del otro) */
+.vehicle-detail-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.vehicle-image-box img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.vehicle-info-box {
+  background-color: #f1f5f9;
+  /* Un color gris muy suave como en Enterprise */
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.vehicle-info-box h2 {
+  margin-top: 0;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.vehicle-price {
+  font-size: 1.8rem;
+  color: #0f172a;
+}
+
+/* Pantallas grandes (lado a lado) */
+@media screen and (min-width: 768px) {
+  .vehicle-detail-container {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .vehicle-image-box {
+    flex: 1.5;
+    /* La imagen toma un poco más de espacio */
+  }
+
+  .vehicle-info-box {
+    flex: 1;
+    /* El texto toma el resto */
+  }
+}

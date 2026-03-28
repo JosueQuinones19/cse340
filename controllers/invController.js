@@ -4,7 +4,7 @@ const utilities = require("../utilities/")
 const invCont = {}
 
 /* ***************************
- *  Build inventory by classification view
+ * Build inventory by classification view
  * ************************** */
 invCont.buildByClassificationId = async function (req, res, next) {
   const classification_id = req.params.classificationId
@@ -18,5 +18,31 @@ invCont.buildByClassificationId = async function (req, res, next) {
     grid,
   })
 }
+
+/* ***************************
+ * Build specific vehicle detail view
+ * ************************** */
+invCont.buildByInvId = async function (req, res, next) {
+  const inv_id = req.params.invId; // Sacamos el ID de la URL
+  const vehicleData = await invModel.getVehicleByInvId(inv_id); // Buscamos en la BD
+  
+  if (!vehicleData) {
+    const err = new Error("Vehicle not found");
+    err.status = 404;
+    return next(err); // Si no existe, mandamos a la página de error 404
+  }
+
+  const gridHTML = await utilities.buildVehicleDetail(vehicleData); // Construimos el HTML
+  let nav = await utilities.getNav(); // Traemos el menú de navegación
+  const vehicleYear = vehicleData.inv_year;
+  const vehicleMake = vehicleData.inv_make;
+  const vehicleModel = vehicleData.inv_model;
+
+  res.render("./inventory/detail", {
+    title: `${vehicleYear} ${vehicleMake} ${vehicleModel}`,
+    nav,
+    gridHTML,
+  });
+};
 
 module.exports = invCont
