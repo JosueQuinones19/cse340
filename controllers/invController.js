@@ -45,4 +45,13 @@ invCont.buildByInvId = async function (req, res, next) {
   });
 };
 
+/* ***************************
+ * Build Intentional Error
+ * ************************** */
+invCont.buildIntentionalError = async function (req, res, next) {
+  let error = new Error("This is an intentional 500 error.");
+  error.status = 500;
+  throw error; // Lanzamos el error a propósito para que el middleware lo atrape
+}
+
 module.exports = invCont
