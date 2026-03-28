@@ -34,7 +34,7 @@ async function getVehicleByInvId(inv_id) {
       "SELECT * FROM public.inventory WHERE inv_id = $1",
       [inv_id]
     )
-    return data.rows[0] // Retornamos solo el primer (y único) resultado
+    return data.rows[0]
   } catch (error) {
     console.error("getVehicleByInvId error " + error)
   }

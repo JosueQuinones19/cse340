@@ -23,17 +23,17 @@ invCont.buildByClassificationId = async function (req, res, next) {
  * Build specific vehicle detail view
  * ************************** */
 invCont.buildByInvId = async function (req, res, next) {
-  const inv_id = req.params.invId; // Sacamos el ID de la URL
-  const vehicleData = await invModel.getVehicleByInvId(inv_id); // Buscamos en la BD
+  const inv_id = req.params.invId; //
+  const vehicleData = await invModel.getVehicleByInvId(inv_id); 
   
   if (!vehicleData) {
     const err = new Error("Vehicle not found");
     err.status = 404;
-    return next(err); // Si no existe, mandamos a la página de error 404
+    return next(err); 
   }
 
-  const gridHTML = await utilities.buildVehicleDetail(vehicleData); // Construimos el HTML
-  let nav = await utilities.getNav(); // Traemos el menú de navegación
+  const gridHTML = await utilities.buildVehicleDetail(vehicleData); 
+  let nav = await utilities.getNav(); 
   const vehicleYear = vehicleData.inv_year;
   const vehicleMake = vehicleData.inv_make;
   const vehicleModel = vehicleData.inv_model;
@@ -51,7 +51,7 @@ invCont.buildByInvId = async function (req, res, next) {
 invCont.buildIntentionalError = async function (req, res, next) {
   let error = new Error("This is an intentional 500 error.");
   error.status = 500;
-  throw error; // Lanzamos el error a propósito para que el middleware lo atrape
+  throw error; 
 }
 
 module.exports = invCont
