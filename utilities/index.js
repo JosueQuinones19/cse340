@@ -6,7 +6,6 @@ const Util = {}
  ************************** */
 Util.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications()
-  console.log(data)
   let list = "<ul>"
   list += '<li><a href="/" title="Home page">Home</a></li>'
   data.rows.forEach((row) => {
@@ -29,7 +28,7 @@ Util.getNav = async function (req, res, next) {
 * Build the classification view HTML
 * ************************************ */
 Util.buildClassificationGrid = async function(data){
-  let grid = "" //
+  let grid = "" 
   if(data.length > 0){
     grid = '<ul id="inv-display">'
     data.forEach(vehicle => { 
@@ -70,10 +69,8 @@ Util.buildVehicleDetail = async function (vehicle) {
       maximumFractionDigits: 0
     }).format(vehicle.inv_price);
 
-  
     let formattedMileage = new Intl.NumberFormat('en-US').format(vehicle.inv_miles);
 
-    
     detailHTML += '<div class="vehicle-detail-container">';
     detailHTML += `<div class="vehicle-image-box">`;
     detailHTML += `<img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model} on CSE Motors">`;
@@ -92,6 +89,28 @@ Util.buildVehicleDetail = async function (vehicle) {
   }
   return detailHTML;
 };
+
+/* ****************************************
+ * Build the classification select list (Task 3)
+ * ************************************** */
+Util.buildClassificationList = async function (classification_id = null) {
+  let data = await invModel.getClassifications()
+  let classificationList =
+    '<select name="classification_id" id="classificationList" required>'
+  classificationList += "<option value=''>Choose a Classification</option>"
+  data.rows.forEach((row) => {
+    classificationList += '<option value="' + row.classification_id + '"'
+    if (
+      classification_id != null &&
+      row.classification_id == classification_id
+    ) {
+      classificationList += " selected "
+    }
+    classificationList += ">" + row.classification_name + "</option>"
+  })
+  classificationList += "</select>"
+  return classificationList
+}
 
 /* ****************************************
  * Middleware For Handling Errors
