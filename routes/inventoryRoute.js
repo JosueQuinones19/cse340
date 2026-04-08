@@ -6,16 +6,16 @@ const utilities = require("../utilities/")
 const invValidate = require("../utilities/inventory-validation") // Movido arriba por orden
 
 // ******************************************
-//  Inventory Management Routes (Task 1 & 2)
+//  Inventory Management Routes 
 // ******************************************
 
 // Route to build inventory management view
 router.get("/", utilities.handleErrors(invController.buildManagement));
 
-// Route to deliver add classification view (Task 2 - GET)
+// Route to deliver add classification view GET
 router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification));
 
-// Route to process adding a classification (Task 2 - POST)
+// Route to process adding a classification POST
 router.post(
   "/add-classification",
   invValidate.classificationRules(),
@@ -41,5 +41,25 @@ router.get("/add-inventory", utilities.handleErrors(invController.buildAddInvent
 
 // POST to process adding a new inventory item
 router.post("/add-inventory", utilities.handleErrors(invController.addInventory));
+
+// Route to handle the update request with validation
+router.post(
+  "/update/",
+  invValidate.newInventoryRules(), // This must exist in inventory-validation.js
+  invValidate.checkUpdateData,    // The function we just created above
+  utilities.handleErrors(invController.updateInventory)
+)
+
+// Route to return inventory by classification identifier as JSON
+router.get(
+  "/getInventory/:classification_id",
+  utilities.handleErrors(invController.getInventoryJSON)
+)
+
+// Route to deliver the edit inventory view
+router.get(
+  "/edit/:inv_id",
+  utilities.handleErrors(invController.editInventoryView)
+)
 
 module.exports = router;

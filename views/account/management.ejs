@@ -1,0 +1,20 @@
+<div class="account-management">
+    <h1>
+        <%= title %>
+    </h1>
+
+    <%- messages() %>
+
+        <% if (locals.errors) { %>
+            <ul class="notice">
+                <% errors.array().forEach(error=> { %>
+                    <li>
+                        <%= error.msg %>
+                    </li>
+                    <% }) %>
+            </ul>
+            <% } %>
+
+                <p>You're logged in</p>
+
+</div>

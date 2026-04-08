@@ -5,7 +5,7 @@
 
     <%- messages() %>
 
-        <% if (errors) { %>
+        <% if (locals.errors) { %>
             <ul class="notice">
                 <% errors.array().forEach(error=> { %>
                     <li>
