@@ -199,4 +199,60 @@ invCont.updateInventory = async function (req, res, next) {
   }
 }
 
+/* ***************************
+ * Build delete confirmation view
+ * ************************** */
+invCont.buildDeleteConfirmationView = async function (req, res, next) {
+  // 1. Collect the inv_id from the incoming request parameters
+  const inv_id = parseInt(req.params.inv_id)
+  
+  // 2. Build the navigation for the new view
+  let nav = await utilities.getNav()
+  
+  // 3. Get the data for the inventory item from the database
+  const itemData = await invModel.getInventoryById(inv_id)
+  
+  // 4. Build a name variable to hold the inventory item's make and model
+  const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+  
+  // 5. Call res.render to deliver the delete confirmation view with data
+  res.render("./inventory/delete-confirm", {
+    title: "Delete " + itemName,
+    nav,
+    errors: null,
+    inv_id: itemData.inv_id,
+    inv_make: itemData.inv_make,
+    inv_model: itemData.inv_model,
+    inv_year: itemData.inv_year,
+    inv_price: itemData.inv_price,
+  })
+}
+
+/* ***************************
+ * Process Inventory Item Deletion
+ * ************************** */
+invCont.deleteItem = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  
+  // 1. Collect the inv_id from the request body and parse it as an integer
+  const inv_id = parseInt(req.body.inv_id)
+
+  // (Optional but recommended) Grab make and model from the body for the flash message
+  const inv_make = req.body.inv_make
+  const inv_model = req.body.inv_model
+
+  // 2. Pass the inv_id to the model function to carry out the delete
+  // Note: You will build deleteInventoryItem in the next step!
+  const deleteResult = await invModel.deleteInventoryItem(inv_id)
+
+  // 3. Check if the delete was successful
+  if (deleteResult) {
+    req.flash("notice", `The ${inv_make} ${inv_model} was successfully deleted.`)
+    res.redirect("/inv/") // Redirects to the inventory management view
+  } else {
+    req.flash("notice", "Sorry, the delete failed.")
+    res.redirect("/inv/delete/" + inv_id) // Redirects back to the delete confirmation view
+  }
+}
+
 module.exports = invCont;

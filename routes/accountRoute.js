@@ -4,6 +4,7 @@ const router = new express.Router()
 const accountController = require("../controllers/accountController")
 const utilities = require("../utilities")
 const regValidate = require('../utilities/account-validation')
+const validate = require("../utilities/account-validation")
 
 // Route to build login view
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
@@ -28,5 +29,35 @@ router.post(
 
 // Route to build the account management view
 router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildManagement))
+
+// Add these with your other routes in accountRoute.js
+
+// Route to deliver the update account view
+router.get(
+  "/update/:accountId", 
+  utilities.checkLogin, 
+  utilities.handleErrors(accountController.buildAccountUpdate)
+)
+
+// Route to handle the account update form submission
+router.post(
+  "/update", 
+  utilities.checkLogin,
+  validate.updateAccountRules(),
+  validate.checkUpdateData,
+  utilities.handleErrors(accountController.updateAccount)
+)
+
+// Route to handle the password change form submission
+router.post(
+  "/update-password", 
+  utilities.checkLogin,
+  validate.updatePasswordRules(),
+  validate.checkPasswordData,
+  utilities.handleErrors(accountController.updatePassword)
+)
+
+// Route to handle the logout process
+router.get("/logout", utilities.handleErrors(accountController.accountLogout))
 
 module.exports = router;

@@ -154,6 +154,29 @@ Util.checkJWTToken = (req, res, next) => {
   }
  }
 
-
+/* ****************************************
+ * Check Account Type / Authorization Middleware
+ * ************************************ */
+Util.checkAccountType = (req, res, next) => {
+  // First, check if someone is logged in
+  if (res.locals.loggedin) {
+    // Grab the account type from the locals object we set during login
+    const account_type = res.locals.accountData.account_type;
+    
+    // Check if they have the right privileges
+    if (account_type === "Employee" || account_type === "Admin") {
+      // They are authorized! Move on to the next piece of middleware/controller
+      return next();
+    } else {
+      // Logged in, but just a "Client"
+      req.flash("notice", "You do not have permission to access that page.");
+      return res.redirect("/account/login");
+    }
+  } else {
+    // Not logged in at all
+    req.flash("notice", "Please log in to access this page.");
+    return res.redirect("/account/login");
+  }
+}
 
 module.exports = Util
