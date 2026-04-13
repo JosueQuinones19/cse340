@@ -46,6 +46,7 @@ invCont.buildByInvId = async function (req, res, next) {
     title: `${vehicleData.inv_year} ${vehicleData.inv_make} ${vehicleData.inv_model}`,
     nav,
     gridHTML,
+    vehicle: vehicleData, // <-- WE ADDED THIS LINE!
   });
 };
 
@@ -242,7 +243,6 @@ invCont.deleteItem = async function (req, res, next) {
   const inv_model = req.body.inv_model
 
   // 2. Pass the inv_id to the model function to carry out the delete
-  // Note: You will build deleteInventoryItem in the next step!
   const deleteResult = await invModel.deleteInventoryItem(inv_id)
 
   // 3. Check if the delete was successful

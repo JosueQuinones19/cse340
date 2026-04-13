@@ -1,7 +1,20 @@
 <% if (title) { %>
-    <h1 class="detail-title"><%= title %></h1>
-<% } else { %>
-    <h1 class='detail-title'>Vehicle Detail</h1>
-<% } %>
+    <h1 class="detail-title">
+        <%= title %>
+    </h1>
+    <% } else { %>
+        <h1 class='detail-title'>Vehicle Detail</h1>
+        <% } %>
 
-<%- gridHTML %>
+            <%- messages() %>
+
+                <%- gridHTML %>
+
+                    <% if (locals.loggedin) { %>
+                        <div style="margin-top: 20px;">
+                            <a href="/favorites/add/<%= vehicle.inv_id %>"
+                                style="background-color: #ffd700; color: #000; padding: 10px 15px; text-decoration: none; border-radius: 5px; font-weight: bold; border: 1px solid #ccc;">
+                                ⭐ Add to Favorites
+                            </a>
+                        </div>
+                        <% } %>

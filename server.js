@@ -71,6 +71,9 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 // Inventory routes
 app.use("/inv", inventoryRoute)
 
+// Favorites Route
+app.use("/favorites", require("./routes/favoriteRoute"))
+
 // Account routes
 app.use("/account", accountRoute)
 

@@ -1,0 +1,37 @@
+<% if (title) { %>
+    <h1>
+        <%= title %>
+    </h1>
+    <% } %>
+
+        <%- messages() %>
+
+            <% if (favData && favData.length> 0) { %>
+                <ul id="inv-display">
+                    <% favData.forEach(vehicle=> { %>
+                        <li>
+                            <a href="/inv/detail/<%= vehicle.inv_id %>"
+                                title="View <%= vehicle.inv_make %> <%= vehicle.inv_model %>">
+                                <img src="<%= vehicle.inv_thumbnail %>"
+                                    alt="Image of <%= vehicle.inv_make %> <%= vehicle.inv_model %>">
+                            </a>
+                            <div class="namePrice">
+                                <hr>
+                                <h2>
+                                    <a href="/inv/detail/<%= vehicle.inv_id %>">
+                                        <%= vehicle.inv_make %>
+                                            <%= vehicle.inv_model %>
+                                    </a>
+                                </h2>
+                                <span>$<%= new Intl.NumberFormat('en-US').format(vehicle.inv_price) %></span>
+                                <br><br>
+                                <a href="/favorites/delete/<%= vehicle.favorite_id %>"
+                                    style="background-color: darkred; color: white; padding: 10px; text-decoration: none; border-radius: 5px; font-size: 0.9rem;">Remove
+                                    Favorite</a>
+                            </div>
+                        </li>
+                        <% }) %>
+                </ul>
+                <% } else { %>
+                    <p class="notice">You have not added any vehicles to your favorites yet.</p>
+                    <% } %>
